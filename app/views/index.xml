@@ -1,6 +1,5 @@
 <Alloy>
 	<Window id="MainWindow" class="container">
-		<Require type="widget" src="com.hospify.slideMenu" id="SlideMenu" />
 		<View id="GlobalWrapper" />
 	</Window>
 </Alloy>

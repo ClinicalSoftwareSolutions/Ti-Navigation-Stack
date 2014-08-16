@@ -1,0 +1,24 @@
+{
+	"global": {
+        "colours": {
+            "primary_disable": "#0d67b3",
+            "primary_disable2": "#40b3ef",
+            "primary": "#00b6f4",
+            "secondary": "#00c7ff",
+            "tertiary": "#A7CBE8",
+            "grey_primary": "#333333",
+            "grey_secondary": "#B3B3B3",
+            "text": "#FFF"
+        }
+	},
+	"env:development": {}, 
+	"env:test": {}, 
+	"env:production": {}, 
+	"os:android": {},
+	"os:blackberry": {},
+	"os:ios": {},
+	"os:mobileweb": {},
+    "dependencies": {
+        "com.hospify.slideMenu": "1.0"
+    }
+}
