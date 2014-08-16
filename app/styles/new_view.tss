@@ -1,0 +1,12 @@
+".container" : {
+	layout: 'vertical',
+	width: '100%',
+	height: "100%"
+}
+"Label": {
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE
+}
+"Button": {
+	color: 'black'
+}

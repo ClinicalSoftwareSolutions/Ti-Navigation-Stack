@@ -1,0 +1,8 @@
+<Alloy>
+	<View id="wrapper" class="container" backgroundColor="black" opacity="0.5">
+		<View id="contents" width="80%" height="80%" backgroundColor="white">
+			<Label text="Modal View" color="black" />
+			<Button id="close" title="Close" bottom="40dp"/>
+		</View>
+	</View>
+</Alloy>

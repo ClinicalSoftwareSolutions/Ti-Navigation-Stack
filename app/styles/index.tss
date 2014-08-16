@@ -1,0 +1,21 @@
+"Window": {
+    backgroundColor: "#EEE",
+},
+"Window[platform=android]": {
+    navBarHidden: true,
+    exitOnClose: true
+},
+"Window[platform=android formFactor=tablet]": {
+    orientationModes: [
+            Ti.UI.LANDSCAPE_LEFT
+    ]
+},
+"Window[formFactor=handheld]": {
+    orientationModes: [
+            Ti.UI.PORTRAIT
+    ]
+},
+"#GlobalWrapper": {
+    width: "100%",
+    backgroundColor: '#fff',
+},
