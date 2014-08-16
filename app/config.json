@@ -19,6 +19,5 @@
 	"os:ios": {},
 	"os:mobileweb": {},
     "dependencies": {
-        "com.hospify.slideMenu": "1.0"
     }
 }
