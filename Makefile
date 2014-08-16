@@ -1,3 +1,6 @@
+# A convenience Makefile
+# Best used with bash-completion
+
 TI=/usr/local/bin/titanium
 DEVICE="iPhone Retina (4 inch)"
 DEVICE_35_INCH="iPhone Retina (3.5 inch)"
