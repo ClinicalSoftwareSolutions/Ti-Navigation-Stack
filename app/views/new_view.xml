@@ -5,6 +5,10 @@
 		<Button id="openChild" title="Open a child" top="40dp" bubbleParent="false"/>
 		<Button id="openModal" title="Open Modal" top="10dp" bubbleParent="false"/>
 		<Button id="close" title="Close" top="30dp" bubbleParent="false"/>
+		<Button id="to0" title="To 0" top="30dp" bubbleParent="false"/>
+		<Button id="to1" title="To 1" top="10dp" bubbleParent="false"/>
+		<Button id="to2" title="To 2" top="10dp" bubbleParent="false"/>
+		<Button id="to3" title="To 3" top="10dp" bubbleParent="false"/>
 		<Label id="stack_instructions" top="20dp" text="swipe up to go down a stack and down to go up" color="black" />
 	</View>
 </Alloy>

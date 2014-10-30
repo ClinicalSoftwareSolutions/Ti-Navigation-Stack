@@ -33,6 +33,19 @@ $.close.addEventListener('click', function(){
 	APP.Stack.navBack();
 });
 
+$.to0.addEventListener('click', function(){
+	APP.Stack.toPage(0);
+});
+$.to1.addEventListener('click', function(){
+	APP.Stack.toPage(1);
+});
+$.to2.addEventListener('click', function(){
+	APP.Stack.toPage(2);
+});
+$.to3.addEventListener('click', function(){
+	APP.Stack.toPage(3);
+});
+
 $.wrapper.addEventListener('swipe', function(e){
 	LOGGER.debug("swipe to "+e.direction+' on stack ' + current_stack + ' child ' + child_number);
 	
