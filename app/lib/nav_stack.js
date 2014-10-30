@@ -196,7 +196,7 @@ function open(_controller, _controllerArguments, _modal) {
 	var controller = Alloy.createController(_controller, controllerArguments);
 	var ctrlView = controller.getView();
 	scrollableView.addView( ctrlView );
-	scrollableView.setCurrentPage( scrollableView.currentPage+1 );
+	scrollableView.scrollToView( scrollableView.currentPage+1 );
 };
 
 /**
