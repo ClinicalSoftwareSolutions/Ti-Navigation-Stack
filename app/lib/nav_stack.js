@@ -216,16 +216,6 @@ function open(_controller, _controllerArguments, _modal) {
 	var ctrlView = controller.getView();
 	ScrollableView.addView( ctrlView );
 	ScrollableView.scrollToView( getNumberOfPages()-1 );
-
-	// ScrollableView.addEventListener('scrollend',function(e){
-	// 	LOGGER.debug(__FILE__+"open() post scrollTo current page now " + ScrollableView.getCurrentPage() );
-		
-	// 	LOGGER.debug(__FILE__+JSON.stringify(e));
-
-	// 	LOGGER.debug(__FILE__+"open() number of pages " + getNumberOfPages() );
-
-	// 	ScrollableView.removeEventListener('scrollend', arguments.callee);
-	// });
 };
 
 /**
