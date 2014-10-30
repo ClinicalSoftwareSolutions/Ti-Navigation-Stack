@@ -170,6 +170,11 @@ function setStack(_index, _args){
  * @return {[type]}                      [description]
  */
 function open(_controller, _controllerArguments, _modal) {
+	if(!_controller){
+		LOGGER.error(__FILE__+'a controller name is required');
+		return;
+	}
+
 	if(_modal) {
 		openModel(_controller, _controllerArguments);
 		return;
@@ -181,8 +186,17 @@ function open(_controller, _controllerArguments, _modal) {
 		return;
 	}
 
-	var Navigator = G.navStacksObjs[ G.currentStackIndex ];
-	Navigator.open(_controller, _controllerArguments);
+	var scrollableView = G.navStacksObjs[G.currentStackIndex];
+	var controllerArguments = _controllerArguments || {};
+
+	LOGGER.debug(__FILE__+'open() on current stack: ' +G.currentStackIndex + 
+		' Creating controller: '+_controller+
+		' with args: '+ JSON.stringify(controllerArguments) );
+
+	var controller = Alloy.createController(_controller, controllerArguments);
+	var ctrlView = controller.getView();
+	scrollableView.addView( ctrlView );
+	scrollableView.setCurrentPage( scrollableView.currentPage+1 );
 };
 
 /**
