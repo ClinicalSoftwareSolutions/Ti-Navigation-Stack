@@ -48,10 +48,40 @@ function init(_args) {
 		G.navStacksParams.unshift({title: 'modal'});
 	}
 
-	// if(OS_ANDROID) {
-	// 	gMainWindow.addEventListener("androidback", backButtonHandler);
-	// }
+};
 
+function createScrollableViewContainer(_index, _args) {
+	var args = _args || {};
+
+	if(! G.navStacksObjs[_index] ) {
+		// Set the controller and controller arguments vars which also handles
+		// 1) if modal in which case passed in args
+		// 2) overide the home controller settings from init
+		var controllerName = args.controller || G.navStacksParams[_index].controller || "";
+		var controllerArguments = args.controllerArguments || {};
+
+		LOGGER.debug(__FILE__+'Stack: ' +_index + 
+			' Creating controller: '+controllerName+
+			' with args: '+ JSON.stringify(controllerArguments) );
+
+		var controller = Alloy.createController(controllerName, controllerArguments);
+
+		var scrollableView = Ti.UI.createScrollableView({
+	    	showPagingControl: false,
+	    	opacity: 0,
+	    	top: 0, left: 0,
+	    	height: Ti.UI.FILL,
+	    	width: Ti.UI.FILL,
+		});
+
+		G.navStacksObjs[_index] = scrollableView;
+		var ctrlView = controller.getView();
+		scrollableView.addView( ctrlView );
+		LOGGER.debug(__FILE__+"createScrollableViewContainer done");
+
+		// Add to the GlobalView
+		G.ContentView.add( scrollableView );
+	}
 };
 
 /**
@@ -84,51 +114,51 @@ function setStack(_index, _args){
 		return;
 	}
 
-	LOGGER.debug(__FILE__+'changing to stack index '+_index);
-
-	// Fire of an event to let the app know we are about to change the stack
-	Ti.App.fireEvent("app:StackChanging", {index: _index, previousIndex: G.currentStackIndex});
-
-	// Hide any view in the currently viewed stack unless closing off a modal in which case there won't be an object
-	if( G.navStacksObjs[G.currentStackIndex] ) {
-		var outgoingStack = G.navStacksObjs[G.currentStackIndex];
-		
-		LOGGER.debug(__FILE__+'hiding current stack top controller');
-
-		outgoingStack.hide();
+	// Check bounds
+	if(_index <1 || _index >G.navStacksParams.length-1) {
+		LOGGER.debug(__FILE__+"invalid stack index");
+		return;
 	}
+
+	LOGGER.debug(__FILE__+'changing to stack index '+_index);
 
 	// Save previous stack index
 	G.previousStackIndex = G.currentStackIndex;
-
 	// Set to the new current stack
 	G.currentStackIndex = _index;
 
-	// If there isn't yet a navigation stack object for this index, then create one
-	if( G.navStacksObjs[_index] ) {
-		LOGGER.debug(__FILE__+'showing existing top level controller of stack '+_index);
-		var incomingStack = G.navStacksObjs[_index];
+	// Fire of an event to let the app know we are about to change the stack
+	Ti.App.fireEvent("app:StackChanging", {index: G.currentStackIndex, previousIndex: G.previousStackIndex});
+
+	// Make new scrollable view container for this stack if reqiured
+	createScrollableViewContainer(_index, args);
+
+	function showStack() {
+		LOGGER.debug(__FILE__+'showStack()');
+
+		var animation = Titanium.UI.createAnimation();
+		animation.opacity = 1;
+		animation.duration = 600;
+
+		var incomingStack = G.navStacksObjs[G.currentStackIndex];
 		incomingStack.show();
+		Ti.API.trace(0);
+		incomingStack.animate(animation);
+	}
+
+	// Hide any view in the currently viewed stack unless closing off a modal in which case there won't be an object
+	if( G.navStacksObjs[G.previousStackIndex] ) {
+		var outgoingStack = G.navStacksObjs[G.previousStackIndex];
+		
+		LOGGER.debug(__FILE__+'hiding current stack top controller');
+		outgoingStack.animate({opacity: 0, duration: 500},
+			function outgoingFadeComplete(){
+				outgoingStack.hide();
+				showStack();
+			});
 	}
 	else {
-		LOGGER.debug(__FILE__+'creating new stack '+_index);
-
-		var Navigator = new Navigation({
-			parent: G.ContentView
-		});
-
-		G.navStacksObjs[_index] = Navigator;
-
-		// Set the controller and controller arguments vars which also handles
-		// 1) if modal in which case passed in args
-		// 2) overide the home controller settings from init
-		var controller = args.controller || G.navStacksParams[_index].controller || "";
-		var controllerArguments = args.controllerArguments || {};
-
-		LOGGER.debug(__FILE__+'opening home controller on stack '+_index);
-		LOGGER.debug(__FILE__+'Controller: '+controller+ ' with args: '+controllerArguments);
-
-		Navigator.open(controller, controllerArguments);
+		showStack();
 	}
 };
 

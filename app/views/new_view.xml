@@ -2,9 +2,9 @@
 	<View id="wrapper" class="container">
 		<Label id="heading" color="black" top="20dp"/>
 		<Label id="stack_lbl" color="black" top="40dp"/>
-		<Button id="openChild" title="Open a child" top="40dp" bubbleParent=false/>
-		<Button id="openModal" title="Open Modal" top="10dp" bubbleParent=false/>
-		<Button id="close" title="Close" top="30dp" bubbleParent=false/>
+		<Button id="openChild" title="Open a child" top="40dp" bubbleParent="false"/>
+		<Button id="openModal" title="Open Modal" top="10dp" bubbleParent="false"/>
+		<Button id="close" title="Close" top="30dp" bubbleParent="false"/>
 		<Label id="stack_instructions" top="20dp" text="swipe up and down to swap between stacks" color="black" />
 	</View>
 </Alloy>

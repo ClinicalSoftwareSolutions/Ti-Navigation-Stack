@@ -34,9 +34,15 @@ $.close.addEventListener('click', function(){
 });
 
 $.wrapper.addEventListener('swipe', function(e){
-	LOGGER.debug("swipe to "+e.direction+' on stack_1_child_1');
+	LOGGER.debug("swipe to "+e.direction+' on stack ' + current_stack + ' child ' + child_number);
+	
 	if(e.direction === "down"){	
-		APP.Stack.setStack("Stack Two");
+		APP.Stack.setStack(current_stack+1);
 	}
+
+	if(e.direction === "up"){	
+		APP.Stack.setStack(current_stack-1);
+	}
+
 });
 

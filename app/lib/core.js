@@ -95,8 +95,11 @@ var APP = {
 		}
 
 
+		APP.MainWindow.addEventListener('open',function(){
+			APP.Stack.setStack(1);
+		});
+		
 		APP.initMainWindow();
-		APP.Stack.setStack(1);
 	},
 
 	/**
